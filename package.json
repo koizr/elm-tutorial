@@ -1,0 +1,12 @@
+{
+  "name": "elm-tutorial",
+  "version": "1.0.0",
+  "description": "elm turorial",
+  "main": "index.js",
+  "repository": "https://github.com/koizumin/elm-tutorial.git",
+  "author": "koizumin",
+  "license": "MIT",
+  "dependencies": {
+    "elm": "^0.18.0"
+  }
+}
