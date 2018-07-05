@@ -8,20 +8,19 @@ import Html.Events exposing(onClick)
 
 
 type alias Model =
-    Bool
+    Int
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( False, Cmd.none )
+    ( 0, Cmd.none )
 
 
 -- Message
 
 
 type Msg
-    = Expand
-    | Collapse
+    = Increment Int
 
 
 -- View
@@ -29,15 +28,10 @@ type Msg
 
 view : Model -> Html Msg
 view model = 
-    -- 受け取ったメッセージに応じて表示する内容を変える
-    if model then
-        div []
-            [ button [ onClick Collapse] [ text "Collapse"]
-            , text "Widget"
-            ]
-    else
-        div []
-            [ button [ onClick Expand] [text "Expand"] ]
+    div []
+        [ button [ onClick (Increment 2)] [text "+"]
+        , text (toString model)
+        ]
 
 
 -- update
@@ -46,12 +40,8 @@ view model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Expand ->
-            ( True, Cmd.none )
-    
-        Collapse ->
-            ( False, Cmd.none )
-            
+        Increment n -> -- case 文ではパターンマッチが使える
+            ( model + n, Cmd.none)
 
 -- subscription
 
