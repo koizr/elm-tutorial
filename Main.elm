@@ -8,7 +8,7 @@ import Widget
 
 
 type alias AppModel =
-    { widgetModel : Widget.Model }
+    { widgetModel : Widget.Model } -- 他の Model を子として持つことができる
 
 
 initialModel : AppModel
@@ -34,7 +34,7 @@ type Msg
 view : AppModel -> Html Msg
 view model = 
     div []
-        [ Html.map WidgetMsg (Widget.view model.widgetModel)
+        [ Html.map WidgetMsg (Widget.view model.widgetModel) -- Widget.view を実行した結果を div に埋め込んでる
         ]
 
 
@@ -45,9 +45,10 @@ update : Msg -> AppModel -> ( AppModel, Cmd Msg )
 update msg model =
     case msg of
         WidgetMsg subMsg ->
+            -- let で変数を定義し、 in でその変数を使った式を定義できる
             let
                 ( updateWidgetModel, widgetCmd ) =
-                    Widget.update subMsg model.widgetModel
+                    Widget.update subMsg model.widgetModel -- Widget.update の結果を使う
             in
                 ( { model | widgetModel = updateWidgetModel }, Cmd.map WidgetMsg widgetCmd )
 
